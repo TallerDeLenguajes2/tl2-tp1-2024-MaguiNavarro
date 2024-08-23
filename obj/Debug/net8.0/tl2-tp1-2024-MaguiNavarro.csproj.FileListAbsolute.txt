@@ -1,0 +1,15 @@
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\bin\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.exe
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\bin\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.deps.json
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\bin\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.runtimeconfig.json
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\bin\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.dll
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\bin\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.pdb
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.AssemblyInfoInputs.cache
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.AssemblyInfo.cs
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.csproj.CoreCompileInputs.cache
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.sourcelink.json
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.dll
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\refint\tl2-tp1-2024-MaguiNavarro.dll
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.pdb
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\tl2-tp1-2024-MaguiNavarro.genruntimeconfig.cache
+C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\obj\Debug\net8.0\ref\tl2-tp1-2024-MaguiNavarro.dll
