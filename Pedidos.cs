@@ -1,27 +1,46 @@
-public class Pedido
+﻿using System;
+
+public enum Estado
 {
-    public int Numero { get; set; }
-    public string Observacion { get; set; }
+    Cancelado,
+    Pendiente,
+    Entregado
+};
+
+public class Pedidos
+{
+    private string observacion;
+    private Estado estado;
+    private int numero;
 
     private Cliente cliente;
 
-    public Pedido(int nro, string obs, Estados estado, string nombre, string direcc, string telefono, string referencias)
+    public Pedidos(string observacion, string nombre, string direccion, string telefono, string datosReferenciaDireccion)
     {
-        Numero = nro;
-        Observacion = obs;
-        cliente = new Cliente(nombre, direcc, telefono, referencias);
+        this.numero = new Random().Next(0, 100000); //simulo una eleccion de numero unico para el pedido, ya se que puede repetirse pero bueno
+        this.observacion = observacion;
+        this.estado = Estado.Pendiente;
+
+        cliente = new Cliente(nombre, direccion, telefono, datosReferenciaDireccion);
     }
 
-    public Estados Estado {get;set;}
-
-    
-
-    public void VerDireccionCliente()
+    public Estado VerEstado()
     {
-
+        return estado;
     }
-    public void VerDatosCliente()
-    {
 
+    public int VerNumero()
+    {
+        return numero;
+    }
+
+    public Cliente VerCliente()
+    {
+        return cliente;
+    }
+
+    public void CambiarEstado(Estado estado)
+    {
+        this.estado = estado;
     }
 }

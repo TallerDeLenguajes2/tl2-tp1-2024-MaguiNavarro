@@ -1,2 +1,0 @@
-composicion: no pueden existir una de la otra pedido-cliente, cadete-cadeteria
-agregacion:  no dependen de la existencia del otro  pedido-cadete 
