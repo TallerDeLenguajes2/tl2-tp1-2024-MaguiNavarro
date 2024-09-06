@@ -12,8 +12,9 @@ public class Pedidos
     private string observacion;
     private Estado estado;
     private int numero;
-
+    private int idCadete;
     private Cliente cliente;
+
 
     public Pedidos(string observacion, string nombre, string direccion, string telefono, string datosReferenciaDireccion)
     {
@@ -42,5 +43,13 @@ public class Pedidos
     public void CambiarEstado(Estado estado)
     {
         this.estado = estado;
+    }
+
+     public int VerIdCadete(){
+        return idCadete;
+    }
+    public void AsignarCadete(int idCadete)
+    {
+        this.idCadete = idCadete;
     }
 }

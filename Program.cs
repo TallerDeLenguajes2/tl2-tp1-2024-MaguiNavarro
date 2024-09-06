@@ -7,11 +7,11 @@ Console.Clear();
 var Cadeteria = new Cadeteria();
 Cadeteria.CargarCadeteria(@"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosCsv\Cadeteria.csv", @"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosCsv\Cadetes.csv");
 
-Pedidos NuevoPedido = null;
-int opcion = 0;
-int cont = 0;
 
-while (cont <= 10) //simulo unos 10 pedidos entregados
+int opcion = 0;
+
+
+while (true) 
 {
     Console.WriteLine("----- MENU -----");
     Console.WriteLine("1- Dar de alta pedidos");
@@ -25,8 +25,7 @@ while (cont <= 10) //simulo unos 10 pedidos entregados
     switch (opcion)
     {
         case 1:
-            if (NuevoPedido == null)
-            {
+           
                 Console.WriteLine("Datos del cliente que tomará el pedido");
                 Console.Write("Nombre: ");
                 string Nombre = Console.ReadLine();
@@ -43,12 +42,10 @@ while (cont <= 10) //simulo unos 10 pedidos entregados
                 Console.WriteLine("Alguna observacion? (si no tiene ninguna dejar en blanco): ");
                 string Observacion = Console.ReadLine();
 
-                NuevoPedido = new Pedidos(Observacion, Nombre, Direccion, Telefono, DatosRef);
-            }
-            else
-            {
-                Console.WriteLine("Tienes un pedido pendiente, asignalo a un cadete antes de continuar");
-            }
+                Pedidos NuevoPedido = new Pedidos(Observacion, Nombre, Direccion, Telefono, DatosRef);
+            
+                
+            
             break;
         case 2:
             if (NuevoPedido == null)
