@@ -5,13 +5,13 @@ using System.Linq;
 Console.Clear();
 
 var Cadeteria = new Cadeteria();
-Cadeteria.CargarCadeteria(@"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosCsv\Cadeteria.csv", @"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosCsv\Cadetes.csv");
+Cadeteria.(@"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosCsv\Cadeteria.csv", @"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosCsv\Cadetes.csv");
 
 
 int opcion = 0;
 
 
-while (true) 
+while (true)
 {
     Console.WriteLine("----- MENU -----");
     Console.WriteLine("1- Dar de alta pedidos");
@@ -25,71 +25,46 @@ while (true)
     switch (opcion)
     {
         case 1:
-           
-                Console.WriteLine("Datos del cliente que tomará el pedido");
-                Console.Write("Nombre: ");
-                string Nombre = Console.ReadLine();
 
-                Console.WriteLine("Direccion: ");
-                string Direccion = Console.ReadLine();
+            Console.WriteLine("Datos del cliente que tomará el pedido");
+            Console.Write("Nombre: ");
+            string Nombre = Console.ReadLine();
 
-                Console.WriteLine("Telefono: ");
-                string Telefono = Console.ReadLine();
+            Console.WriteLine("Direccion: ");
+            string Direccion = Console.ReadLine();
 
-                Console.WriteLine("Datos de referencia de tu domicilio: ");
-                string DatosRef = Console.ReadLine();
+            Console.WriteLine("Telefono: ");
+            string Telefono = Console.ReadLine();
 
-                Console.WriteLine("Alguna observacion? (si no tiene ninguna dejar en blanco): ");
-                string Observacion = Console.ReadLine();
+            Console.WriteLine("Datos de referencia de tu domicilio: ");
+            string DatosRef = Console.ReadLine();
 
-                Pedidos NuevoPedido = new Pedidos(Observacion, Nombre, Direccion, Telefono, DatosRef);
-            
-                
-            
+            Console.WriteLine("Alguna observacion? (si no tiene ninguna dejar en blanco): ");
+            string Observacion = Console.ReadLine();
+
+            Pedidos NuevoPedido = new Pedidos(Observacion, Nombre, Direccion, Telefono, DatosRef);
+
+
             break;
         case 2:
-            if (NuevoPedido == null)
+            var idCadete = Cadeteria.IdCadeteAleatorio();
+            var idPedido = Cadeteria.IdPedidoPendiente();
+
+            if (idPedido != -1)
             {
-                Console.WriteLine("Debe realizar un pedido para poder asignarselo al cadete");
+                Cadeteria.AsignarCadeteAPedido(idCadete, idPedido);
+                Console.WriteLine("Pedido asignado con exito");
             }
             else
             {
-                int random = new Random().Next(0, Cadeteria.ListaCadetes.Count);
-                Cadeteria.AsignarPedido(random, NuevoPedido);
-                NuevoPedido = null;
+                Console.WriteLine("No existen pedidos para ser asignados");
             }
             break;
         case 3:
             Console.WriteLine("Pedidos pendientes restantes: ");
             Cadeteria.MostrarPedidosPendientes();
 
-            Console.Write("Ingrese el numero del pedido:");
-            int NroPedido = int.Parse(Console.ReadLine());
-
-            Pedidos pedido = Cadeteria.EncontrarPedido(NroPedido);
-
-            if (pedido != null)
-            {
-                Console.WriteLine($"Pedido encontrado, su estado actual es {pedido.VerEstado()}, a cual quieres cambiarlo?");
-                Console.WriteLine("1 - Entregado");
-                Console.WriteLine("2 - Cancelado");
-                int eleccionEstado = int.Parse(Console.ReadLine());
-                switch (eleccionEstado)
-                {
-                    case 1:
-                        pedido.CambiarEstado(Estado.Entregado);
-                        cont++;
-
-                        break;
-                    case 2:
-                        pedido.CambiarEstado(Estado.Cancelado);
-                        break;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Pedido no encontrado");
-            }
+            Cadeteria.AsignarCadeteAPedido;
 
             break;
         case 4:
@@ -99,7 +74,7 @@ while (true)
             Console.Write("Ingrese el numero del pedido:");
             NroPedido = int.Parse(Console.ReadLine());
 
-            pedido = Cadeteria.EncontrarPedido(NroPedido);
+            pedido = Cadeteria.AsignarCadeteAPedido(NroPedido);
             if (pedido != null)
             {
                 Console.WriteLine("Elija el cadete que tendrá el pedido: ");
@@ -112,34 +87,35 @@ while (true)
             }
 
             break;
-            case 5:
+        case 5:
             GenerarInformeJornal();
             break;
     }
 }
-void GenerarInformeJornal(){
-Console.WriteLine("--- Informe jornal ---");
-
-//creo lo que se llama un tipo anonimo, en el que encapsulo una serie de propiedades en un objeto sin definir un tipo explicitamente.
-var InformeQuery = from cadete in Cadeteria.ListaCadetes
-                   select new
-                   {
-                       Nombre = cadete.VerNombre(),
-                       EnviosCompletados = cadete.ListaPedidos.Count(p => p.VerEstado() == Estado.Entregado), //cuento la cant de envios completados que tiene
-                       MontoRecaudado = cadete.ListaPedidos.Where(p => p.VerEstado() == Estado.Entregado) //filtro los pedidos para quedarme solo con los que fueron entregados
-                                                       .Sum(p => 500)
-                   };
-
-foreach (var cadete in InformeQuery)
+void GenerarInformeJornal()
 {
-    Console.WriteLine($"Cadete: {cadete.Nombre} | Envios completados: {cadete.EnviosCompletados} | Monto recaudado: {cadete.MontoRecaudado}");
+    Console.WriteLine("--- Informe jornal ---");
+
+    //creo lo que se llama un tipo anonimo, en el que encapsulo una serie de propiedades en un objeto sin definir un tipo explicitamente.
+    var InformeQuery = from cadete in Cadeteria.ListaCadetes
+                       select new
+                       {
+                           Nombre = cadete.VerNombre(),
+                           EnviosCompletados = cadete.ListaPedidos.Count(p => p.VerEstado() == Estado.Entregado), //cuento la cant de envios completados que tiene
+                           MontoRecaudado = cadete.ListaPedidos.Where(p => p.VerEstado() == Estado.Entregado) //filtro los pedidos para quedarme solo con los que fueron entregados
+                                                           .Sum(p => 500)
+                       };
+
+    foreach (var cadete in InformeQuery)
+    {
+        Console.WriteLine($"Cadete: {cadete.Nombre} | Envios completados: {cadete.EnviosCompletados} | Monto recaudado: {cadete.MontoRecaudado}");
+    }
+
+    var TotalRecuadado = InformeQuery.Sum(c => c.MontoRecaudado);
+    var EnviosTotales = InformeQuery.Sum(c => c.EnviosCompletados);
+    var EnviosPromedio = InformeQuery.Average(c => c.EnviosCompletados);
+
+    Console.WriteLine($"Total recaudado entre todos los cadetes: {TotalRecuadado}");
+    Console.WriteLine($"Envios totales: {EnviosTotales}");
+    Console.WriteLine($"Envios en promedio por cadete: {EnviosPromedio}");
 }
-
-var TotalRecuadado = InformeQuery.Sum(c => c.MontoRecaudado);
-var EnviosTotales = InformeQuery.Sum(c => c.EnviosCompletados);
-var EnviosPromedio = InformeQuery.Average(c => c.EnviosCompletados);
-
-Console.WriteLine($"Total recaudado entre todos los cadetes: {TotalRecuadado}");
-Console.WriteLine($"Envios totales: {EnviosTotales}");
-Console.WriteLine($"Envios en promedio por cadete: {EnviosPromedio}");
- }

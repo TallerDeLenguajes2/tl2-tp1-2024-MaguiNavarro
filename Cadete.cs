@@ -27,5 +27,4 @@ public class Cadete
         return nombre;
     }
 
-   
 }
