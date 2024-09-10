@@ -1,0 +1,50 @@
+[
+    {
+      "Id": 1,
+      "Nombre": "Juan Perez",
+      "Direccion": "Que te importa",
+      "Telefono": "565-1234"
+    },
+    {
+      "Id": 2,
+      "Nombre": "Ana Gómez",
+      "Direccion": "Avenida Siempre Viva 456",
+      "Telefono": "555-5678"
+    },
+    {
+      "Id": 3,
+      "Nombre": "Jorge Medina",
+      "Direccion": "Calle Mayor 789",
+      "Telefono": "555-9012"
+    },
+    {
+      "Id": 4,
+      "Nombre": "Lucía Rodriguez",
+      "Direccion": "Avenida Taylor Swift 345",
+      "Telefono": "555-3456"
+    },
+    {
+      "Id": 5,
+      "Nombre": "Magui Navarro",
+      "Direccion": "Calle juijuiji",
+      "Telefono": "555-7000"
+    },
+    {
+      "Id": 6,
+      "Nombre": "Lana del Rey",
+      "Direccion": "Avenida Born to die",
+      "Telefono": "555-2345"
+    },
+    {
+      "Id": 7,
+      "Nombre": "Roberto Morales",
+      "Direccion": "Calle Pequeña 456",
+      "Telefono": "665-7567"
+    },
+    {
+      "Id": 8,
+      "Nombre": "Laura Martínez",
+      "Direccion": "Boulevard Sur 980",
+      "Telefono": "888-6788"
+    }
+  ]
