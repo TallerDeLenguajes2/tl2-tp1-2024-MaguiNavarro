@@ -18,25 +18,36 @@ public class Cadeteria
         listaPedidos = new List<Pedidos>();
     }
 
-    public Cadeteria()
+   public int JornalACobrar(int idCadete)
     {
-    }
+        int cont = 0;
+        var cadete = listaCadetes.Find(c => c.VerId() == idCadete);
+        
+        foreach(var pedido in listaPedidos)
+        {
+            if(pedido.VerIdCadete() == idCadete)
+            {
+                if(pedido.VerEstado() == Estado.Entregado)
+                {
+                    cont += 500;
+                }
+            }
+        }
 
-    public void AsignarCadeteAPedido(int idCadete, int idPedido)
+        return cont;
+    }
+   public void AsignarCadeteAPedido(int idCadete, int idPedido)
     {
         var pedido = listaPedidos.Find(p => p.VerNumero() == idPedido);
         pedido.AsignarCadete(idCadete);
     }
+
+   
       public void AgregarPedido(Pedidos pedido)
     {
         listaPedidos.Add(pedido);
     }
- public void AgregarCadete(string id, string nombre, string direccion, string telefono)
-    {
-        var nuevoCadete = new Cadete(int.Parse(id, nombre, direccion, telefono);
-     
-        listaCadetes.Add(nuevoCadete);
-    }
+
 
     private Cadete CadeteAleatorio()
     {
@@ -121,22 +132,5 @@ public class Cadeteria
         }
     }
 
-       public int JornalACobrar(int idCadete)
-    {
-        int cont = 0;
-        var cadete = listaCadetes.Find(c => c.VerId() == idCadete);
-        
-        foreach(var pedido in listaPedidos)
-        {
-            if(pedido.VerIdCadete() == idCadete)
-            {
-                if(pedido.VerEstado() == Estado.Entregado)
-                {
-                    cont += 500;
-                }
-            }
-        }
-
-        return cont;
-    }
+   
 }
