@@ -1,10 +1,14 @@
 ﻿using System;
-
+using System.Text.Json.Serialization;
 public class Cadete
 {
+   [JsonInclude]
     private int id;
+    [JsonInclude]
     private string direccion;
+    [JsonInclude]
     private string telefono;
+    [JsonInclude]
     private string nombre;
 
 
@@ -26,5 +30,12 @@ public class Cadete
     {
         return nombre;
     }
-
+      public string VerDireccion()
+    {
+        return direccion;
+    }
+       public string VerTelefono()
+    {
+        return telefono;
+    }
 }

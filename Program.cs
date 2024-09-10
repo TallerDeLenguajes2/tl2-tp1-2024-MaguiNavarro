@@ -6,7 +6,28 @@ Console.Clear();
 
 
 Cadeteria Cadeteria = null;
+
 System.Console.WriteLine("Que tipo de acceso quiere usar? 0 = CSV, 1 = JSON");
+int opcionAcceso = int.Parse(Console.ReadLine());
+switch (opcionAcceso)
+{
+    case 0: var accesoDatosCSV = new AccesoCSV();
+            Cadeteria = accesoDatosCSV.CargarCadeteria(@"ArchivosCsv\Cadeteria.csv");
+            foreach(var cadete in accesoDatosCSV.CargarCadetes(@"ArchivosCsv\Cadetes.csv"))
+            {
+                Cadeteria.AgregarCadete(cadete.VerId(), cadete.VerNombre(), cadete.VerDireccion(), cadete.VerTelefono());
+            }
+        break;
+    case 1: var accesoDatosJSON = new AccesoJson();
+            Cadeteria = accesoDatosJSON.CargarCadeteria(@"ArchivosJson\Cadeteria.json");
+            foreach(var cadete in accesoDatosJSON.CargarCadetes(@"ArchivosJson\Cadetes.json"))
+            {
+                Cadeteria.AgregarCadete(cadete.VerId(), cadete.VerNombre(), cadete.VerDireccion(), cadete.VerTelefono());
+            }
+        break;
+}
+
+
 
 int opcion = 0;
 

@@ -1,10 +1,13 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices.Marshalling;
+using System.Text.Json.Serialization;
 using Microsoft.VisualBasic;
 public class Cadeteria
 {
+      [JsonInclude]
     private string nombre;
+    [JsonInclude]
     private string telefono;
 
      private List<Cadete> listaCadetes;
@@ -42,7 +45,11 @@ public class Cadeteria
         pedido.AsignarCadete(idCadete);
     }
 
-   
+      public void AgregarCadete(int id, string nombre, string direccion, string telefono)
+    {
+        var nuevoCadete = new Cadete(id, nombre, direccion, telefono);
+        listaCadetes.Add(nuevoCadete);
+    }
       public void AgregarPedido(Pedidos pedido)
     {
         listaPedidos.Add(pedido);
