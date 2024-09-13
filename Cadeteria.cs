@@ -1,8 +1,7 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices.Marshalling;
+using System.Text;
 using System.Text.Json.Serialization;
-using Microsoft.VisualBasic;
+
 public class Cadeteria
 {
       [JsonInclude]
@@ -88,26 +87,11 @@ public class Cadeteria
         pedido.AsignarCadete(idCadete);
     }
 
-    public void CambiarEstadoPedido(int numero)
-    {
-        var pedido = listaPedidos.Find(p => p.VerNumero() == numero);
-
-        Console.WriteLine($"Su estado actual es {pedido.VerEstado()}, cual será su nuevo estado?");
-        Console.WriteLine("0 = Cancelado");
-        Console.WriteLine("1 = Entregado");
-        Console.Write("Opcion: ");
-        int opcion = int.Parse(Console.ReadLine());
-
-        switch (opcion)
-        {
-            case 0:
-                pedido.CambiarEstado(Estado.Cancelado);
-                break;
-            case 1:
-                pedido.CambiarEstado(Estado.Entregado);
-                break;
-        }
-    }
+    public void CambiarEstadoPedido(int numero, Estado nuevoEstado)
+{
+    var pedido = listaPedidos.Find(p => p.VerNumero() == numero);
+    pedido.CambiarEstado(nuevoEstado);
+}
 
     public bool ExistePedido(int numero)
     {
@@ -119,17 +103,20 @@ public class Cadeteria
         return listaCadetes.Any(c => c.VerId() == id);
     }
 
-    public void MostrarPedidosPendientes()
+    public string ObtenerPedidosPendientes()
+{
+    var resultado = new StringBuilder();
+
+    foreach (var pedido in listaPedidos)
     {
-        foreach (var pedido in listaPedidos)
+        if (pedido.VerEstado() == Estado.Pendiente)
         {
-            if (pedido.VerEstado() == Estado.Pendiente)
-            {
-                Console.WriteLine($"Numero: {pedido.VerNumero()}, Cliente: {pedido.VerCliente().VerNombre()} | " +
-                    $"Cadete: {(pedido.VerIdCadete() != null ? "Asignado" : "Sin Asignar")}");
-            }
-        } 
+            resultado.AppendLine($"Numero: {pedido.VerNumero()}, Cliente: {pedido.VerCliente().VerNombre()} | " +
+                $"Cadete: {(pedido.VerIdCadete() != null ? "Asignado" : "Sin Asignar")}");
+        }
     }
+    return resultado.ToString();
+}
 
     public void MostrarCadetes()
     {
