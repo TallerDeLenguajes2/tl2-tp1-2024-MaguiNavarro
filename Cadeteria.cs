@@ -87,11 +87,20 @@ public class Cadeteria
         pedido.AsignarCadete(idCadete);
     }
 
-    public void CambiarEstadoPedido(int numero, Estado nuevoEstado)
-{
-    var pedido = listaPedidos.Find(p => p.VerNumero() == numero);
-    pedido.CambiarEstado(nuevoEstado);
-}
+    public void CambiarEstadoPedido(int numeroPedido, int opcionEstado)
+    {
+        var pedido = listaPedidos.Find(p => p.VerNumero() == numeroPedido);
+
+        switch (opcionEstado)
+        {
+            case 0:
+                pedido.CambiarEstado(Estado.Cancelado);
+                break;
+            case 1:
+                pedido.CambiarEstado(Estado.Entregado);
+                break;
+        }
+    }
 
     public bool ExistePedido(int numero)
     {
@@ -118,13 +127,15 @@ public class Cadeteria
     return resultado.ToString();
 }
 
-    public void MostrarCadetes()
+ public string MostrarCadetes()
+{
+    StringBuilder resultado = new StringBuilder();
+    foreach (var cadete in listaCadetes)
     {
-        foreach(var cadete in listaCadetes)
-        {
-            Console.WriteLine($"{cadete.VerId()} | {cadete.VerNombre()}");
-        }
+        resultado.AppendLine($"{cadete.VerId()} | {cadete.VerNombre()}");
     }
+    return resultado.ToString();
+}
 
    
 }
