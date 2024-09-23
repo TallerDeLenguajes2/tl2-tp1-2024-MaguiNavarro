@@ -55,7 +55,7 @@ public class Cadeteria
     }
 
 
-    private Cadete CadeteAleatorio()
+       private Cadete GenerarCadeteAleatorio()
     {
         var indexRandom = new Random().Next(listaCadetes.Count);
         var cadete = listaCadetes[indexRandom];
@@ -64,8 +64,9 @@ public class Cadeteria
 
     public int IdCadeteAleatorio()
     {
-        var cadete = CadeteAleatorio();
+      var cadete = GenerarCadeteAleatorio();
         return cadete.VerId();
+    
     }
      public int IdPedidoPendiente()
     {
@@ -112,30 +113,38 @@ public class Cadeteria
         return listaCadetes.Any(c => c.VerId() == id);
     }
 
-    public string ObtenerPedidosPendientes()
-{
-    var resultado = new StringBuilder();
-
-    foreach (var pedido in listaPedidos)
+public string[] ObtenerPedidosPendientes()
     {
-        if (pedido.VerEstado() == Estado.Pendiente)
+        int cantPedidosPendientes = listaPedidos.Count(p => p.VerEstado() == Estado.Pendiente);
+        string[] arregloPedidosPendientes = new string[cantPedidosPendientes];
+        int i = 0;
+
+        foreach (var pedido in listaPedidos)
         {
-            resultado.AppendLine($"Numero: {pedido.VerNumero()}, Cliente: {pedido.VerCliente().VerNombre()} | " +
-                $"Cadete: {(pedido.VerIdCadete() != null ? "Asignado" : "Sin Asignar")}");
+            if (pedido.VerEstado() == Estado.Pendiente)
+            {
+                arregloPedidosPendientes[i] = $"Numero: {pedido.VerNumero()}, Cliente: {pedido.VerCliente().VerNombre()} | " +
+                    $"Cadete: {(pedido.VerIdCadete() >= 0 ? "Asignado" : "Sin Asignar")}";
+                i++;
+            }
         }
-    }
-    return resultado.ToString();
-}
 
- public string MostrarCadetes()
-{
-    StringBuilder resultado = new StringBuilder();
-    foreach (var cadete in listaCadetes)
-    {
-        resultado.AppendLine($"{cadete.VerId()} | {cadete.VerNombre()}");
+        return arregloPedidosPendientes;
     }
-    return resultado.ToString();
-}
+  public string[] ObtenerCadetes()
+    {
+        int cantidadCadetes = listaCadetes.Count;
+        string[] arregloCadetes = new string[cantidadCadetes];
+        int i = 0;
+        
+        foreach (var cadete in listaCadetes)
+        {
+            arregloCadetes[i] = $"{cadete.VerId()} |  {cadete.VerNombre()}";
+            i++;
+        }
+
+        return arregloCadetes;
+    }
 
    
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tl2-tp1-2024-MaguiNavarro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a53167a2832a938bc433d41495d8eaa6151e07c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a3999b7ad1fbc38095df34cf80a8ceed3fcf68fa")]
 [assembly: System.Reflection.AssemblyProductAttribute("tl2-tp1-2024-MaguiNavarro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tl2-tp1-2024-MaguiNavarro")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

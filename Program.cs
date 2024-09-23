@@ -1,29 +1,31 @@
 ﻿using System;
 using System.Reflection;
 using System.Linq;
-
+using DatosDesdeArchivos;
 Console.Clear();
 
 
 Cadeteria Cadeteria = null;
 
-System.Console.WriteLine("Que tipo de acceso quiere usar? 0 = CSV, 1 = JSON");
+Console.WriteLine("Que tipo de acceso quiere usar? 0 = CSV, 1 = JSON");
 int opcionAcceso = int.Parse(Console.ReadLine());
 switch (opcionAcceso)
 {
-    case 0: var accesoDatosCSV = new AccesoCSV();
-            Cadeteria = accesoDatosCSV.CargarCadeteria(@"ArchivosCsv\Cadeteria.csv");
-            foreach(var cadete in accesoDatosCSV.CargarCadetes(@"ArchivosCsv\Cadetes.csv"))
-            {
-                Cadeteria.AgregarCadete(cadete.VerId(), cadete.VerNombre(), cadete.VerDireccion(), cadete.VerTelefono());
-            }
+    case 0:
+        var accesoDatosCSV = new AccesoCSV();
+        Cadeteria = accesoDatosCSV.CargarCadeteria(@"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosCsv\Cadeteria.csv");
+        foreach (var cadete in accesoDatosCSV.CargarCadetes(@"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosCsv\Cadetes.csv"))
+        {
+            Cadeteria.AgregarCadete(cadete.VerId(), cadete.VerNombre(), cadete.VerDireccion(), cadete.VerTelefono());
+        }
         break;
-    case 1: var accesoDatosJSON = new AccesoJson();
-            Cadeteria = accesoDatosJSON.CargarCadeteria(@"ArchivosJson\Cadeteria.json");
-            foreach(var cadete in accesoDatosJSON.CargarCadetes(@"ArchivosJson\Cadetes.json"))
-            {
-                Cadeteria.AgregarCadete(cadete.VerId(), cadete.VerNombre(), cadete.VerDireccion(), cadete.VerTelefono());
-            }
+    case 1:
+        var accesoDatosJSON = new AccesoJson();
+        Cadeteria = accesoDatosJSON.CargarCadeteria(@"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosJson\Cadeteria.json");
+        foreach (var cadete in accesoDatosJSON.CargarCadetes(@"C:\Users\Magui Navarro\Desktop\Facultad\Taller2\TP1\tl2-tp1-2024-MaguiNavarro\ArchivosJson\Cadetes.json"))
+        {
+            Cadeteria.AgregarCadete(cadete.VerId(), cadete.VerNombre(), cadete.VerDireccion(), cadete.VerTelefono());
+        }
         break;
 }
 
@@ -65,7 +67,7 @@ while (true)
 
             Pedidos NuevoPedido = new Pedidos(Observacion, Nombre, Direccion, Telefono, DatosRef);
             Cadeteria.AgregarPedido(NuevoPedido);
-         
+
             break;
         case 2:
             var idCadete = Cadeteria.IdCadeteAleatorio();
@@ -82,16 +84,25 @@ while (true)
             }
             break;
         case 3:
-            Cadeteria.ObtenerPedidosPendientes();
-            Console.WriteLine("A qué pedido le quiere cambiar el estado? Ingrese su numero: ");
-            int numero = int.Parse(Console.ReadLine());
+             string[] arregloPedidosPendientes = Cadeteria.ObtenerPedidosPendientes();
 
-            if (Cadeteria.ExistePedido(numero))
+            foreach (var cadete in arregloPedidosPendientes)
             {
-                Console.WriteLine("Ingrese el nuevo estado del pedido (0 = Cancelado, 1 = Entregado): ");
-                int opcionEstado = int.Parse(Console.ReadLine());
+                Console.WriteLine(cadete);
+            }
 
-                Cadeteria.CambiarEstadoPedido(numero, opcionEstado);
+            Console.WriteLine("A qué pedido le quiere cambiar el estado? Ingrese su numero: ");
+            int NumeroPedido = int.Parse(Console.ReadLine());
+
+            if (Cadeteria.ExistePedido(NumeroPedido))
+            {
+                Console.WriteLine($"Cual será el nuevo estado del pedido?");
+                Console.WriteLine("0 = Cancelado");
+                Console.WriteLine("1 = Entregado");
+                Console.Write("Opcion: ");
+                int EstadoElegido = int.Parse(Console.ReadLine());
+
+                Cadeteria.CambiarEstadoPedido(NumeroPedido, EstadoElegido);
             }
             else
             {
@@ -99,29 +110,40 @@ while (true)
             }
 
             break;
+
         case 4:
-              Console.WriteLine("Pedidos pendientes restantes: ");
-            Console.WriteLine(Cadeteria.ObtenerPedidosPendientes());
+             arregloPedidosPendientes = Cadeteria.ObtenerPedidosPendientes();
 
-           Console.WriteLine("Elija número del pedido a reasignar: ");
-            int nroPedido = int.Parse(Console.ReadLine());
-
-            if (Cadeteria.ExistePedido(nroPedido))
+            foreach(var cadete in arregloPedidosPendientes)
             {
-                Console.WriteLine(Cadeteria.MostrarCadetes());
-                Console.WriteLine("¿A qué cadete le quiere asignar el pedido? Ingrese su Id: ");
-                int idCadeteNuevo = int.Parse(Console.ReadLine());
+                Console.WriteLine(cadete);
+            }
 
-                if (Cadeteria.ExisteCadete(idCadeteNuevo))
+            Console.WriteLine("Elija numero del pedido a reasignar: ");
+    
+
+            NumeroPedido = int.Parse(Console.ReadLine());
+
+            if (Cadeteria.ExistePedido(NumeroPedido))
+            {
+                string [] arregloCadetes = Cadeteria.ObtenerCadetes();
+
+                foreach (var cadete in arregloCadetes)
                 {
-                   Cadeteria.ReasignarPedido(nroPedido, idCadeteNuevo);
-                    
+                    Console.WriteLine(cadete);
+                }
+
+                Console.WriteLine("A que cadete le quiere asignar el pedido? Ingresar su Id: ");
+                int IdCadete = int.Parse(Console.ReadLine());
+
+                if (Cadeteria.ExisteCadete(IdCadete))
+                {
+                    Cadeteria.ReasignarPedido(NumeroPedido, IdCadete);
                 }
                 else
                 {
-                    Console.WriteLine("El Id ingresado no corresponde a ningún cadete.");
+                    Console.WriteLine("El id ingresado no corresponde a ningun cadete");
                 }
-
             }
             else
             {
@@ -129,7 +151,7 @@ while (true)
             }
 
             break;
-      
+
     }
 }
 // void GenerarInformeJornal()

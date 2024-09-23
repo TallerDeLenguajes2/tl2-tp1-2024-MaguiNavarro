@@ -7,9 +7,9 @@ public class Cliente
 	private string datosReferenciaDireccion;
 	private string nombre;
 	
-	public Cliente(string nombre, string direccion, string telefono, string datosReferenciaDireccion)
+	public Cliente(string nombres, string direccion, string telefono, string datosReferenciaDireccion)
 	{
-		this.nombre = nombre;
+		this.nombre = nombres;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.datosReferenciaDireccion = datosReferenciaDireccion;
